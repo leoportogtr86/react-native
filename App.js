@@ -1,24 +1,41 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Button from './src/components/Button'
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, Image } from 'react-native';
+import Pai from './src/components/Pai';
+import Axios from 'axios'
+import Ferrari from './src/components/ferrari.jpeg'
+
 
 export default function App() {
+
+  const [url, setUrl] = useState('./src/components/ferrari.jpeg')
+
+  const [estado, setEstado] = useState('')
+
+  Axios.get('https://gu-adaptacoes.herokuapp.com/ma').then((res)=>{
+
+      
+
+      setEstado(res.data.estado)
+
+      // teste
+
+
+  })
 
 
   return (
     <View style={styles.container}>
 
 
-      <Text style = {styles.text}>{1 + 1}</Text>
-      <Button style = {styles.button} title = "Click 1"/>
-      <Button title = "Click 2"/>
-      <Button title = "Click 3"/>
-      <Button title = "Click 4"/>
-      <Button title = "Click 5"/>
-      <Button title = "Click 6"/>
-      <Button title = "Click 7"/>
+      <Pai/>
+      <Text>{estado}</Text>
+
+      <Image style = {styles.image} source = {Ferrari}/>
       
+      
+      
+     
       
 
       <StatusBar style="auto" />
@@ -29,7 +46,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#222',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
 
@@ -37,14 +54,13 @@ const styles = StyleSheet.create({
 
   text:{
 
-    fontSize: 200,
+    fontSize: 20,
     color: "yellow",
     fontWeight: 'bold'
     
   },
+  image:{
 
-  button:{
-
-    backgroundColor: "red"
+    width: 400
   }
 });
